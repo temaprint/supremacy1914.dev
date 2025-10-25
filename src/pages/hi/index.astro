@@ -1,0 +1,89 @@
+---
+import Layout from '../../components/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import TelegramButton from '../../components/TelegramButton.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { getLangFromUrl, useTranslations, seoKeywords } from '../../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const keywords = `${seoKeywords[lang as keyof typeof seoKeywords]}`;
+---
+
+<Layout
+  title={t('site.title')}
+  keywords={keywords}
+  schemaType="website"
+  description={t('site.description')}
+  lang={lang}
+  keywords={seoKeywords[lang as keyof typeof seoKeywords]}
+  schemaType="website"
+>
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-military-olive/20 to-military-brass/20 overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23000000" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] bg-repeat"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 text-center relative z-10">
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-military-dark dark:text-military-light">
+        <span class="text-military-olive dark:text-military-tan">{t('home.welcome.title')}</span>
+      </h1>
+      
+      <p class="text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+        {t('home.welcome.description')}
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+        <TelegramButton text={t('cta.joinTelegram')} size="lg" />
+        <a href="/hi/allies" class="inline-flex items-center px-8 py-4 text-lg font-semibold bg-white dark:bg-military-dark text-military-olive dark:text-military-tan border-2 border-military-olive rounded-xl hover:bg-military-olive hover:text-white dark:hover:bg-military-tan dark:hover:text-military-dark transition-all duration-300 transform hover:scale-105">
+          {t('cta.findAllies')}
+        </a>
+        <a href="https://supremacy1914.com" target="_blank" class="inline-flex items-center px-8 py-4 text-lg font-semibold text-military-olive dark:text-military-tan hover:text-military-brass transition-colors duration-300">
+          {t('cta.startPlaying')}
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section class="py-16 bg-gray-50 dark:bg-military-dark/50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-military-dark dark:text-military-light">
+        Master the Art of <span class="text-military-olive dark:text-military-tan">Strategic Warfare</span>
+      </h2>
+      
+      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <GuideCard 
+          title={t('home.features.guides')}
+          description={t('home.features.guides.desc')}
+          icon="⚔️"
+          href="/hi/guide"
+        />
+        
+        <GuideCard 
+          title={t('home.features.allies')}
+          description={t('home.features.allies.desc')}
+          icon="🤝"
+          href="/hi/allies"
+        />
+        
+        <GuideCard 
+          title={t('home.features.community')}
+          description={t('home.features.community.desc')}
+          icon="📜"
+          href="/hi/rules"
+        />
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</Layout>

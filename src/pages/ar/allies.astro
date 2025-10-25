@@ -1,0 +1,212 @@
+---
+import Layout from '../../components/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import TelegramButton from '../../components/TelegramButton.astro';
+import { getLangFromUrl, useTranslations, seoKeywords } from '../../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const keywords = `${seoKeywords[lang as keyof typeof seoKeywords]}, alliance finder, matchmaking, coalition`;
+---
+
+<Layout
+  title={`${t('menu.allies')} - ${t('site.title')}`} lang={lang}
+  keywords={keywords}
+  schemaType="webpage"
+>
+  <Header />
+  
+  <main class="py-16">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-military-dark dark:text-military-light">
+          Find Your <span class="text-military-olive dark:text-military-tan">Strategic Partners</span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
+          Connect with generals worldwide and forge the alliances that will determine the fate of Europe
+        </p>
+      </div>
+      
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Search Form -->
+        <div class="lg:col-span-2">
+          <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-8 border border-military-tan/20">
+            <h2 class="text-2xl font-bold text-military-olive dark:text-military-tan mb-6">Alliance Search</h2>
+            
+            <form class="space-y-6">
+              <!-- Language Preference -->
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  Preferred Language
+                </label>
+                <select class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-military-olive focus:border-transparent">
+                  <option value="any">Any Language</option>
+                  <option value="en">English</option>
+                  <option value="ru">Русский</option>
+                  <option value="de">Deutsch</option>
+                  <option value="fr">Français</option>
+                  <option value="es">Español</option>
+                </select>
+              </div>
+              
+              <!-- Experience Level -->
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  Experience Level
+                </label>
+                <select class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-military-olive focus:border-transparent">
+                  <option value="any">Any Level</option>
+                  <option value="beginner">Beginner (0-50 games)</option>
+                  <option value="intermediate">Intermediate (50-200 games)</option>
+                  <option value="advanced">Advanced (200+ games)</option>
+                  <option value="expert">Expert/Veteran</option>
+                </select>
+              </div>
+              
+              <!-- Strategy Preference -->
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  Strategy Style
+                </label>
+                <select class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-military-olive focus:border-transparent">
+                  <option value="any">Any Style</option>
+                  <option value="diplomatic">Diplomatic & Peaceful</option>
+                  <option value="aggressive">Aggressive Expansion</option>
+                  <option value="economic">Economic Focus</option>
+                  <option value="coalition">Coalition Builder</option>
+                </select>
+              </div>
+              
+              <!-- Timezone -->
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  Timezone Preference
+                </label>
+                <select class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-military-olive focus:border-transparent">
+                  <option value="any">Any Timezone</option>
+                  <option value="america">Americas (UTC-8 to UTC-3)</option>
+                  <option value="europe">Europe (UTC+0 to UTC+3)</option>
+                  <option value="asia">Asia-Pacific (UTC+5 to UTC+12)</option>
+                </select>
+              </div>
+              
+              <!-- Search Button -->
+              <button type="submit" class="w-full px-8 py-4 bg-gradient-to-r from-military-olive to-military-brass text-white font-semibold rounded-xl hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                Find Alliance Partners
+              </button>
+            </form>
+          </div>
+          
+          <!-- Search Results -->
+          <div class="mt-8 bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-8 border border-military-tan/20">
+            <h3 class="text-xl font-bold text-military-olive dark:text-military-tan mb-6">Available Generals</h3>
+            
+            <div class="text-center py-12 text-gray-500 dark:text-gray-400">
+              <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <p class="text-lg">Use the search form above to find alliance partners</p>
+              <p class="text-sm mt-2">Results will connect you directly to our Telegram community</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <div class="space-y-6">
+          <!-- Join Telegram CTA -->
+          <div class="bg-gradient-to-br from-military-olive/20 to-military-brass/20 rounded-2xl p-6 text-center border border-military-tan/30">
+            <div class="text-4xl mb-4">📱</div>
+            <h3 class="text-xl font-bold text-military-olive dark:text-military-tan mb-4">Join Our Community</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6 text-sm">
+              Connect instantly with thousands of active players in our Telegram groups. Share strategies, coordinate attacks, and build lasting alliances.
+            </p>
+            <TelegramButton text={t('cta.joinTelegram')} size="md" />
+          </div>
+          
+          <!-- Alliance Tips -->
+          <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-6 border border-military-tan/20">
+            <h3 class="text-lg font-bold text-military-olive dark:text-military-tan mb-4">🤝 Alliance Tips</h3>
+            <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+              <li class="flex items-start">
+                <span class="text-military-olive mr-2 mt-1">•</span>
+                <span>Start with non-aggression pacts before full alliances</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-military-olive mr-2 mt-1">•</span>
+                <span>Share intelligence about common enemies</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-military-olive mr-2 mt-1">•</span>
+                <span>Coordinate attacks for maximum effectiveness</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-military-olive mr-2 mt-1">•</span>
+                <span>Respect your allies' territorial claims</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-military-olive mr-2 mt-1">•</span>
+                <span>Plan for the late game together</span>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Community Stats -->
+          <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-6 border border-military-tan/20">
+            <h3 class="text-lg font-bold text-military-olive dark:text-military-tan mb-4">📊 Community Stats</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600 dark:text-gray-300 text-sm">Active Players</span>
+                <span class="font-bold text-military-olive dark:text-military-tan">2,847+</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600 dark:text-gray-300 text-sm">Ongoing Games</span>
+                <span class="font-bold text-military-olive dark:text-military-tan">156</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600 dark:text-gray-300 text-sm">Languages Supported</span>
+                <span class="font-bold text-military-olive dark:text-military-tan">16</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600 dark:text-gray-300 text-sm">Success Rate</span>
+                <span class="font-bold text-military-olive dark:text-military-tan">94%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  // Handle form submission
+  document.querySelector('form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Show loading state
+    const button = e.target.querySelector('button[type="submit"]');
+    const originalText = button?.innerHTML;
+    if (button) {
+      button.innerHTML = '<svg class="w-5 h-5 mr-2 inline animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Searching...';
+    }
+    
+    // Simulate search
+    setTimeout(() => {
+      if (button && originalText) {
+        button.innerHTML = originalText;
+      }
+      
+      // Show results (redirect to Telegram)
+      const lang = document.documentElement.lang || 'en';
+      const telegramUrl = lang === 'ru' ? 'https://t.me/supremacy1914ru' : 'https://t.me/Supremacy1914EN';
+      window.open(telegramUrl, '_blank');
+    }, 2000);
+  });
+</script>

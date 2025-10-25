@@ -1,0 +1,72 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header class="bg-military-olive/90 dark:bg-military-dark/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+  <nav class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-2 text-2xl font-bold text-military-tan hover:text-military-brass transition-colors">
+        <span>🏛️</span>
+        <div class="flex flex-col leading-tight">
+          <span class="text-xl">Supremacy1914.dev</span>
+          <span class="text-xs text-military-light/80">Master the art of war</span>
+        </div>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="/" class="nav-link">{t('menu.home')}</a>
+        <a href="/guide" class="nav-link">{t('menu.guide')}</a>
+        <a href="/rules" class="nav-link">{t('menu.rules')}</a>
+        <a href="/allies" class="nav-link">{t('menu.allies')}</a>
+        <a href="/contact" class="nav-link">{t('menu.contact')}</a>
+      </div>
+      
+      <!-- Controls -->
+      <div class="flex items-center space-x-4">
+        <ThemeToggle />
+        <LanguageSwitcher />
+        
+        <!-- Mobile menu button -->
+        <button class="md:hidden mobile-menu-btn">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div class="md:hidden mobile-menu hidden mt-4 pb-4">
+      <div class="flex flex-col space-y-2">
+        <a href="/" class="nav-link-mobile">{t('menu.home')}</a>
+        <a href="/guide" class="nav-link-mobile">{t('menu.guide')}</a>
+        <a href="/rules" class="nav-link-mobile">{t('menu.rules')}</a>
+        <a href="/allies" class="nav-link-mobile">{t('menu.allies')}</a>
+        <a href="/contact" class="nav-link-mobile">{t('menu.contact')}</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  document.querySelector('.mobile-menu-btn')?.addEventListener('click', () => {
+    document.querySelector('.mobile-menu')?.classList.toggle('hidden');
+  });
+</script>
+
+<style>
+  .nav-link {
+    @apply text-military-light hover:text-military-tan transition-colors duration-200 font-medium;
+  }
+  
+  .nav-link-mobile {
+    @apply text-military-light hover:text-military-tan transition-colors duration-200 font-medium py-2 px-4 rounded-lg hover:bg-military-olive/50;
+  }
+</style>

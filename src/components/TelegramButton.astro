@@ -1,0 +1,37 @@
+---
+import { telegramLinks, getLangFromUrl } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const telegramUrl = lang === 'ru' ? telegramLinks.ru : telegramLinks.default;
+
+export interface Props {
+  text: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { text, variant = 'primary', size = 'md' } = Astro.props;
+
+const baseClasses = 'inline-flex items-center justify-center font-semibold transition-all duration-300 rounded-xl transform hover:scale-105 active:scale-95';
+
+const variantClasses = {
+  primary: 'bg-gradient-to-r from-military-olive to-military-brass text-white shadow-lg hover:shadow-xl border-2 border-military-tan/50',
+  secondary: 'bg-white dark:bg-military-dark text-military-olive dark:text-military-tan border-2 border-military-olive hover:bg-military-olive hover:text-white dark:hover:bg-military-tan dark:hover:text-military-dark'
+};
+
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg'
+};
+---
+
+<a 
+  href={telegramUrl} 
+  target="_blank" 
+  rel="noopener noreferrer"
+  class={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]}`}
+>
+  💙
+  {text}
+</a>

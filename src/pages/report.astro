@@ -1,0 +1,221 @@
+---
+import Layout from '../components/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getLangFromUrl, useTranslations, seoKeywords } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const keywords = `${seoKeywords[lang as keyof typeof seoKeywords]}, report, violation, moderation, fair play`;
+---
+
+<Layout
+  title={`Report Violation - ${t('site.title')}`} lang={lang}
+  keywords={keywords}
+  schemaType="webpage"
+>
+  <Header />
+  
+  <main class="py-16">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-military-dark dark:text-military-light">
+          Report a <span class="text-red-600 dark:text-red-400">Violation</span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+          Help us maintain fair play and community standards
+        </p>
+      </div>
+      
+      <!-- Report Form -->
+      <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-8 border border-military-tan/20">
+        <form id="reportForm" class="space-y-6">
+          <!-- Violation Type -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Type of Violation *
+            </label>
+            <select required class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent">
+              <option value="">Select violation type</option>
+              <option value="multi-account">Multi-Accounting</option>
+              <option value="bot-usage">Bot/Script Usage</option>
+              <option value="treaty-breaking">Excessive Treaty Breaking</option>
+              <option value="harassment">Harassment/Toxic Behavior</option>
+              <option value="cheating">Cheating/Exploits</option>
+              <option value="spam">Spam/Advertising</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <!-- Player Name -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Reported Player Name *
+            </label>
+            <input 
+              type="text" 
+              required
+              placeholder="Enter the player's in-game name"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            />
+          </div>
+          
+          <!-- Game ID -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Game/Map ID (if applicable)
+            </label>
+            <input 
+              type="text" 
+              placeholder="e.g., Map ID, Game Round number"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            />
+          </div>
+          
+          <!-- Your Name -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Your Player Name *
+            </label>
+            <input 
+              type="text" 
+              required
+              placeholder="Your in-game name for follow-up"
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            />
+          </div>
+          
+          <!-- Description -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Detailed Description *
+            </label>
+            <textarea 
+              required
+              rows="6"
+              placeholder="Please provide detailed information about the violation, including dates, times, and specific actions observed..."
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-military-dark text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-red-500 focus:border-transparent resize-vertical"
+            ></textarea>
+          </div>
+          
+          <!-- Evidence Upload -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              Evidence (Screenshots, etc.)
+            </label>
+            <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+              <input type="file" id="evidence" multiple accept="image/*" class="hidden" />
+              <label for="evidence" class="cursor-pointer">
+                <div class="text-gray-400 mb-2">
+                  <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                  </svg>
+                </div>
+                <p class="text-gray-600 dark:text-gray-400">
+                  <span class="text-red-600 hover:text-red-700">Upload files</span> or drag and drop
+                </p>
+                <p class="text-xs text-gray-500 mt-1">PNG, JPG up to 10MB each</p>
+              </label>
+            </div>
+            <div id="fileList" class="mt-2 space-y-1"></div>
+          </div>
+          
+          <!-- Terms -->
+          <div class="flex items-start space-x-3">
+            <input type="checkbox" required class="mt-1 h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded" />
+            <label class="text-sm text-gray-600 dark:text-gray-300">
+              I confirm that the information provided is accurate and I understand that false reports may result in penalties. *
+            </label>
+          </div>
+          
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            class="w-full px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-500/50"
+          >
+            Submit Report
+          </button>
+        </form>
+      </div>
+      
+      <!-- Info Panel -->
+      <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+        <div class="flex items-start space-x-3">
+          <svg class="w-6 h-6 text-blue-600 dark:text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <h3 class="font-semibold text-blue-800 dark:text-blue-300 mb-2">What Happens Next?</h3>
+            <ul class="text-sm text-blue-700 dark:text-blue-200 space-y-1">
+              <li>• Your report will be reviewed by our moderation team within 24-48 hours</li>
+              <li>• We may contact you through Telegram for additional information</li>
+              <li>• Appropriate action will be taken if the violation is confirmed</li>
+              <li>• You'll receive a follow-up notification about the outcome</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<script>
+  // File upload handling
+  const fileInput = document.getElementById('evidence') as HTMLInputElement;
+  const fileList = document.getElementById('fileList');
+  
+  fileInput?.addEventListener('change', (e) => {
+    const files = (e.target as HTMLInputElement).files;
+    if (files && fileList) {
+      fileList.innerHTML = '';
+      Array.from(files).forEach(file => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center justify-between bg-gray-100 dark:bg-gray-700 rounded-lg p-2 text-sm';
+        div.innerHTML = `
+          <span class="text-gray-700 dark:text-gray-300">${file.name}</span>
+          <span class="text-gray-500 text-xs">${(file.size / 1024 / 1024).toFixed(2)} MB</span>
+        `;
+        fileList.appendChild(div);
+      });
+    }
+  });
+  
+  // Form submission
+  document.getElementById('reportForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const button = e.target?.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalText = button?.innerHTML;
+    
+    if (button) {
+      button.innerHTML = '<svg class="w-5 h-5 mr-2 inline animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Submitting Report...';
+      button.disabled = true;
+    }
+    
+    // Simulate form submission
+    setTimeout(() => {
+      if (button && originalText) {
+        button.innerHTML = '<svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Report Submitted Successfully!';
+        button.className = button.className.replace('bg-red-600 hover:bg-red-700', 'bg-green-600');
+        
+        // Show success message
+        const form = document.getElementById('reportForm');
+        if (form) {
+          form.innerHTML = `
+            <div class="text-center py-12">
+              <div class="text-green-600 text-6xl mb-4">✓</div>
+              <h2 class="text-2xl font-bold text-green-800 dark:text-green-400 mb-4">Report Submitted Successfully</h2>
+              <p class="text-gray-600 dark:text-gray-300 mb-6">Thank you for helping maintain our community standards. We'll review your report and take appropriate action.</p>
+              <a href="/contact" class="inline-flex items-center px-6 py-3 bg-military-olive hover:bg-military-brass text-white rounded-xl transition-colors">
+                Back to Contact
+              </a>
+            </div>
+          `;
+        }
+      }
+    }, 2000);
+  });
+</script>

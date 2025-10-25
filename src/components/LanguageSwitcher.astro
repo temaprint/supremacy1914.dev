@@ -1,0 +1,47 @@
+---
+import { languages, getLangFromUrl } from '../i18n';
+
+const currentLang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname.replace(/^\/[a-z]{2}(\/|$)/, '/');
+---
+
+<div class="relative language-switcher">
+  <button class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-military-tan/20 hover:bg-military-tan/30 transition-all duration-200 text-military-light">
+    <span>🌐</span>
+    <span class="uppercase text-sm font-medium">{currentLang}</span>
+    <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+  
+  <div class="language-dropdown absolute right-0 mt-2 w-48 bg-white dark:bg-military-dark rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 hidden z-50">
+    {Object.entries(languages).map(([code, name]) => (
+      <a 
+        href={code === 'en' ? currentPath : `/${code}${currentPath}`}
+        class={`block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
+          code === currentLang ? 'bg-military-tan/20 text-military-olive font-medium' : 'text-gray-700 dark:text-gray-300'
+        }`}
+      >
+        {name}
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelector('.language-switcher button')?.addEventListener('click', () => {
+    const dropdown = document.querySelector('.language-dropdown');
+    const arrow = document.querySelector('.language-switcher svg');
+    
+    dropdown?.classList.toggle('hidden');
+    arrow?.classList.toggle('rotate-180');
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target?.closest('.language-switcher')) {
+      document.querySelector('.language-dropdown')?.classList.add('hidden');
+      document.querySelector('.language-switcher svg')?.classList.remove('rotate-180');
+    }
+  });
+</script>

@@ -1,0 +1,163 @@
+---
+import Layout from '../../components/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import TelegramButton from '../../components/TelegramButton.astro';
+import { getLangFromUrl, useTranslations, seoKeywords } from '../../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const keywords = `${seoKeywords[lang as keyof typeof seoKeywords]}, contact, support, help, FAQ`;
+---
+
+<Layout
+  title={`${t('menu.contact')} - ${t('site.title')}`} lang={lang}
+  keywords={keywords}
+  schemaType="webpage"
+>
+  <Header />
+  
+  <main class="py-16">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-military-dark dark:text-military-light">
+          Get in <span class="text-military-olive dark:text-military-tan">Touch</span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+          Questions about the community? Need help with the game? We're here to assist!
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- FAQ Section -->
+        <div class="space-y-6">
+          <h2 class="text-2xl font-bold text-military-olive dark:text-military-tan mb-6">Frequently Asked Questions</h2>
+          
+          <div class="bg-white dark:bg-military-dark/80 rounded-xl p-6 border border-military-tan/20">
+            <h3 class="font-bold text-military-dark dark:text-military-light mb-3">How do I join the Telegram community?</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+              Click the "Join Telegram" button anywhere on our site. You'll be directed to the appropriate group based on your language preference.
+            </p>
+            <TelegramButton text={t('cta.joinTelegram')} size="sm" />
+          </div>
+          
+          <div class="bg-white dark:bg-military-dark/80 rounded-xl p-6 border border-military-tan/20">
+            <h3 class="font-bold text-military-dark dark:text-military-light mb-3">What are the community rules?</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+              We promote fair play, strategic warfare, and diplomatic honor. Check our 
+              <a href="/ja/rules" class="text-military-olive dark:text-military-tan hover:underline">Community Rules</a> 
+              page for detailed guidelines.
+            </p>
+          </div>
+          
+          <div class="bg-white dark:bg-military-dark/80 rounded-xl p-6 border border-military-tan/20">
+            <h3 class="font-bold text-military-dark dark:text-military-light mb-3">How can I find alliance partners?</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+              Use our <a href="/ja/allies" class="text-military-olive dark:text-military-tan hover:underline">Alliance Finder</a> 
+              tool or connect directly with players in our Telegram groups. Most alliance coordination happens in real-time chat.
+            </p>
+          </div>
+          
+          <div class="bg-white dark:bg-military-dark/80 rounded-xl p-6 border border-military-tan/20">
+            <h3 class="font-bold text-military-dark dark:text-military-light mb-3">Is this site official?</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+              No, this is a fan-made community hub created by players for players. 
+              The official Supremacy 1914 website is 
+              <a href="https://supremacy1914.com" target="_blank" class="text-military-olive dark:text-military-tan hover:underline">supremacy1914.com</a>.
+            </p>
+          </div>
+          
+          <div class="bg-white dark:bg-military-dark/80 rounded-xl p-6 border border-military-tan/20">
+            <h3 class="font-bold text-military-dark dark:text-military-light mb-3">Can I report problematic behavior?</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+              Yes! Use our <a href="/ja/report" class="text-military-olive dark:text-military-tan hover:underline">Report Form</a> 
+              to notify moderators about rule violations or unsporting conduct.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Contact Options -->
+        <div class="space-y-6">
+          <h2 class="text-2xl font-bold text-military-olive dark:text-military-tan mb-6">Contact Options</h2>
+          
+          <!-- Telegram -->
+          <div class="bg-gradient-to-br from-military-olive/20 to-military-brass/20 rounded-xl p-6 border border-military-tan/30">
+            <div class="flex items-center mb-4">
+              <div class="text-3xl mr-4">📱</div>
+              <div>
+                <h3 class="font-bold text-military-olive dark:text-military-tan">Telegram Groups</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300">Fastest response, 24/7 community support</p>
+              </div>
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 text-sm mb-4">
+              Our active community moderators and experienced players are always ready to help in real-time.
+            </p>
+            <TelegramButton text="Join Community Chat" size="md" />
+          </div>
+          
+          <!-- Community Moderators -->
+          <div class="bg-white dark:bg-military-dark/80 rounded-xl p-6 border border-military-tan/20">
+            <div class="flex items-center mb-4">
+              <div class="text-3xl mr-4">👮‍♂️</div>
+              <div>
+                <h3 class="font-bold text-military-olive dark:text-military-tan">Community Moderators</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300">Available in Telegram groups</p>
+              </div>
+            </div>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-300">General Questions:</span>
+                <span class="font-mono text-military-olive dark:text-military-tan">@S1914_Support</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-300">Technical Issues:</span>
+                <span class="font-mono text-military-olive dark:text-military-tan">@S1914_Tech</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-300">Rule Violations:</span>
+                <span class="font-mono text-military-olive dark:text-military-tan">@S1914_Moderator</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Response Times -->
+          <div class="bg-white dark:bg-military-dark/80 rounded-xl p-6 border border-military-tan/20">
+            <h3 class="font-bold text-military-olive dark:text-military-tan mb-4">📊 Response Times</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-300">Telegram Chat:</span>
+                <span class="font-semibold text-green-600">Usually < 30 minutes</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-300">Reports:</span>
+                <span class="font-semibold text-blue-600">Within 24 hours</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600 dark:text-gray-300">Technical Issues:</span>
+                <span class="font-semibold text-orange-600">1-3 business days</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Languages -->
+          <div class="bg-white dark:bg-military-dark/80 rounded-xl p-6 border border-military-tan/20">
+            <h3 class="font-bold text-military-olive dark:text-military-tan mb-4">🌐 Language Support</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
+              Our community moderators support multiple languages:
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-1 bg-military-olive/20 text-military-olive dark:text-military-tan rounded text-xs">English</span>
+              <span class="px-2 py-1 bg-military-olive/20 text-military-olive dark:text-military-tan rounded text-xs">Русский</span>
+              <span class="px-2 py-1 bg-military-olive/20 text-military-olive dark:text-military-tan rounded text-xs">Deutsch</span>
+              <span class="px-2 py-1 bg-military-olive/20 text-military-olive dark:text-military-tan rounded text-xs">Français</span>
+              <span class="px-2 py-1 bg-military-olive/20 text-military-olive dark:text-military-tan rounded text-xs">Español</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>

@@ -1,0 +1,24 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  icon: string;
+  href: string;
+}
+
+const { title, description, icon, href } = Astro.props;
+---
+
+<a href={href} class="group block">
+  <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-military-tan/20 hover:border-military-tan/40 transform hover:scale-105">
+    <div class="text-4xl mb-4 text-military-olive dark:text-military-tan">{icon}</div>
+    <h3 class="text-xl font-bold mb-3 text-military-dark dark:text-military-light group-hover:text-military-olive dark:group-hover:text-military-tan transition-colors">{title}</h3>
+    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">{description}</p>
+    <div class="mt-4 flex items-center text-military-olive dark:text-military-tan font-medium">
+      <span>Learn more</span>
+      <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Smooth scrolling for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Font improvements */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-military-olive rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-military-brass;
+  }
+}
+
+@layer components {
+  /* Button base styles */
+  .btn-military {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-military-olive to-military-brass text-white shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply bg-white dark:bg-military-dark text-military-olive dark:text-military-tan border-2 border-military-olive hover:bg-military-olive hover:text-white dark:hover:bg-military-tan dark:hover:text-military-dark;
+  }
+  
+  /* Card styles */
+  .card-military {
+    @apply bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg border border-military-tan/20 transition-all duration-300;
+  }
+  
+  .card-military:hover {
+    @apply shadow-xl border-military-tan/40;
+  }
+  
+  /* Text gradient */
+  .text-gradient-military {
+    @apply bg-gradient-to-r from-military-olive to-military-brass bg-clip-text text-transparent;
+  }
+  
+  /* Loading animation */
+  .loading-dots::after {
+    content: '';
+    animation: loading 2s infinite;
+  }
+  
+  @keyframes loading {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+    100% { content: ''; }
+  }
+}
+
+@layer utilities {
+  /* Text shadow utilities */
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .text-shadow {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Backdrop blur utilities */
+  .backdrop-blur-military {
+    backdrop-filter: blur(10px) saturate(1.2);
+  }
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  @apply outline-none ring-2 ring-military-olive/50 ring-offset-2 ring-offset-white dark:ring-offset-military-dark;
+}
+
+/* Selection styles */
+::selection {
+  @apply bg-military-olive/30 text-military-dark;
+}
+
+/* Dark mode transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply text-black bg-white;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-military-olive {
+    @apply text-black dark:text-white;
+  }
+  
+  .bg-military-olive {
+    @apply bg-black dark:bg-white;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

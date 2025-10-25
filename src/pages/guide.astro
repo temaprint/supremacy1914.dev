@@ -1,0 +1,106 @@
+---
+import Layout from '../components/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TelegramButton from '../components/TelegramButton.astro';
+import { getLangFromUrl, useTranslations, seoKeywords } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const keywords = `${seoKeywords[lang as keyof typeof seoKeywords]}, beginner guide, tutorial, strategy tips`;
+---
+
+<Layout
+  title={`${t('menu.guide')} - ${t('site.title')}`}
+  lang={lang}
+  keywords={keywords}
+  schemaType="article"
+>
+  <Header />
+  
+  <main class="py-16">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-military-dark dark:text-military-light">
+          <span class="text-military-olive dark:text-military-tan">Beginner's Guide</span> to Victory
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+          Master the fundamentals of Supremacy 1914 and build your path to continental domination
+        </p>
+      </div>
+      
+      <!-- Guide Content -->
+      <article class="prose prose-lg max-w-none prose-headings:text-military-olive dark:prose-headings:text-military-tan prose-a:text-military-olive dark:prose-a:text-military-tan">
+        <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-8 mb-8 border border-military-tan/20">
+          <h2>🎯 Getting Started</h2>
+          <p>
+            Welcome, future general! Supremacy 1914 is a real-time strategy game set during World War I. 
+            You'll control a nation and must manage resources, build armies, forge alliances, and expand your territory 
+            to become the dominant power in Europe.
+          </p>
+        </div>
+        
+        <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-8 mb-8 border border-military-tan/20">
+          <h2>🏭 Economy & Resource Management</h2>
+          <p>Success in Supremacy 1914 depends on four key resources:</p>
+          <ul>
+            <li><strong>Money:</strong> Build structures and maintain armies</li>
+            <li><strong>Food:</strong> Keep your population and troops fed</li>
+            <li><strong>Materials:</strong> Construct buildings and produce units</li>
+            <li><strong>Energy:</strong> Power your industries and infrastructure</li>
+          </ul>
+          <p>
+            Focus on building a balanced economy early. Construct factories in high-resource provinces and 
+            railroads to connect your territories for faster troop movement.
+          </p>
+        </div>
+        
+        <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-8 mb-8 border border-military-tan/20">
+          <h2>🤝 Diplomacy & Alliances</h2>
+          <p>
+            Diplomacy is crucial for survival. Form non-aggression pacts with neighbors, create trade agreements, 
+            and build coalitions against common enemies. Remember: today's ally might be tomorrow's rival, 
+            but early cooperation is essential for growth.
+          </p>
+          <p>
+            <strong>Pro tip:</strong> Always honor your agreements initially to build reputation, 
+            but be prepared to adapt as the strategic situation changes.
+          </p>
+        </div>
+        
+        <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-8 mb-8 border border-military-tan/20">
+          <h2>⚔️ Your First 5 Strategic Moves</h2>
+          <ol>
+            <li><strong>Secure your core provinces</strong> - Build barracks in your most valuable territories</li>
+            <li><strong>Establish resource production</strong> - Construct factories and workshops</li>
+            <li><strong>Initiate diplomacy</strong> - Send peace offers to immediate neighbors</li>
+            <li><strong>Scout your borders</strong> - Deploy infantry to monitor enemy movements</li>
+            <li><strong>Plan your expansion</strong> - Identify weak neighbors for future conquest</li>
+          </ol>
+        </div>
+        
+        <div class="bg-white dark:bg-military-dark/80 rounded-2xl shadow-lg p-8 mb-8 border border-military-tan/20">
+          <h2>❌ Common Mistakes to Avoid</h2>
+          <ul>
+            <li><strong>Expanding too quickly</strong> - Overextension leads to resource shortage</li>
+            <li><strong>Neglecting diplomacy</strong> - Fighting everyone simultaneously is suicide</li>
+            <li><strong>Poor resource management</strong> - Always maintain positive resource flow</li>
+            <li><strong>Ignoring intelligence</strong> - Use spies to monitor enemy activities</li>
+            <li><strong>Breaking treaties carelessly</strong> - Reputation matters in diplomacy</li>
+          </ul>
+        </div>
+        
+        <div class="bg-military-olive/10 dark:bg-military-tan/10 rounded-2xl p-8 text-center">
+          <h3 class="text-2xl font-bold mb-4 text-military-olive dark:text-military-tan">Ready to Form Alliances?</h3>
+          <p class="mb-6 text-gray-700 dark:text-gray-300">
+            Join our Telegram community to find experienced allies and get real-time strategic advice!
+          </p>
+          <TelegramButton text={t('cta.joinTelegram')} size="lg" />
+        </div>
+      </article>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>

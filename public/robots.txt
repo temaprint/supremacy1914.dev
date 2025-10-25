@@ -1,0 +1,9 @@
+# Supremacy 1914 Fan Hub - Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://supremacy1914.dev/sitemap.xml
+
+# Crawl-delay (optional, adjust as needed)
+Crawl-delay: 1

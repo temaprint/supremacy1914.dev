@@ -1,0 +1,56 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer class="bg-military-dark text-military-light py-12 mt-16">
+  <div class="container mx-auto px-4">
+    <div class="grid md:grid-cols-4 gap-8">
+      <!-- Logo & Description -->
+      <div class="md:col-span-2">
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="text-3xl">🏛️</span>
+          <div class="flex flex-col leading-tight">
+            <h3 class="text-2xl font-bold text-military-tan">Supremacy1914</h3>
+            <span class="text-sm text-military-light/70">.dev</span>
+          </div>
+        </div>
+        <p class="text-gray-300 leading-relaxed mb-4">
+          The ultimate community platform for Supremacy 1914 strategists worldwide.
+          Join thousands of players sharing tactics, forming alliances, and conquering maps together.
+        </p>
+        <div class="flex space-x-4">
+          <a href="https://t.me/Supremacy1914EN" target="_blank" rel="noopener noreferrer" class="text-2xl hover:scale-110 transition-transform" aria-label="Join our Telegram community">
+            💙
+          </a>
+        </div>
+      </div>
+      
+      <!-- Quick Links -->
+      <div>
+        <h4 class="font-semibold text-military-tan mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="/guide" class="text-gray-300 hover:text-military-tan transition-colors">{t('menu.guide')}</a></li>
+          <li><a href="/rules" class="text-gray-300 hover:text-military-tan transition-colors">{t('menu.rules')}</a></li>
+          <li><a href="/allies" class="text-gray-300 hover:text-military-tan transition-colors">{t('menu.allies')}</a></li>
+        </ul>
+      </div>
+      
+      <!-- Community -->
+      <div>
+        <h4 class="font-semibold text-military-tan mb-4">Community</h4>
+        <ul class="space-y-2">
+          <li><a href="/contact" class="text-gray-300 hover:text-military-tan transition-colors">{t('menu.contact')}</a></li>
+          <li><a href="/report" class="text-gray-300 hover:text-military-tan transition-colors">Report Issue</a></li>
+          <li><a href="https://supremacy1914.com" target="_blank" class="text-gray-300 hover:text-military-tan transition-colors">Official Game</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+      <p>&copy; 2025 <span class="text-military-tan">supremacy1914.dev</span> - Created by the community, for the community.</p>
+    </div>
+  </div>
+</footer>

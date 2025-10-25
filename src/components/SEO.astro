@@ -1,0 +1,104 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: string;
+  keywords?: string;
+  author?: string;
+  robots?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  canonicalUrl,
+  ogImage = '/og-image.png',
+  ogType = 'website',
+  keywords = 'Supremacy 1914, strategy game, WWI, World War 1, alliance, tactics, multiplayer, browser game, Telegram community',
+  author = 'Supremacy 1914 Fan Community',
+  robots = 'index, follow',
+  publishedTime,
+  modifiedTime
+} = Astro.props;
+
+const siteUrl = Astro.site || 'https://supremacy1914.dev';
+const fullCanonicalUrl = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
+const fullOgImage = new URL(ogImage, siteUrl).href;
+
+const localeMap: Record<string, string> = {
+  en: 'en_US',
+  ru: 'ru_RU',
+  de: 'de_DE',
+  fr: 'fr_FR',
+  tr: 'tr_TR',
+  es: 'es_ES',
+  pt: 'pt_PT',
+  pl: 'pl_PL',
+  it: 'it_IT',
+  fi: 'fi_FI',
+  sv: 'sv_SE',
+  nb: 'nb_NO',
+  ar: 'ar_SA',
+  id: 'id_ID',
+  ja: 'ja_JP',
+  zh: 'zh_CN',
+  hi: 'hi_IN'
+};
+
+const ogLocale = localeMap[lang] || 'en_US';
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+<meta name="robots" content={robots} />
+<link rel="canonical" href={fullCanonicalUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={fullCanonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={fullOgImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:site_name" content="Supremacy 1914 Fan Hub" />
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={fullCanonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullOgImage} />
+<meta name="twitter:creator" content="@Supremacy1914" />
+
+<!-- Additional SEO -->
+<meta name="language" content={lang} />
+<meta name="revisit-after" content="7 days" />
+<meta name="rating" content="general" />
+<meta name="distribution" content="global" />
+<meta name="coverage" content="Worldwide" />
+<meta name="theme-color" content="#4A5D23" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="S1914 Hub" />
+
+<!-- Favicon and Icons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+
+<!-- Preconnect to external domains -->
+<link rel="preconnect" href="https://t.me" crossorigin />
+<link rel="dns-prefetch" href="https://t.me" />

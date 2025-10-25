@@ -1,0 +1,127 @@
+---
+export interface Props {
+  type?: 'website' | 'article' | 'organization' | 'webpage';
+  title?: string;
+  description?: string;
+  lang?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const {
+  type = 'website',
+  title = 'Supremacy 1914 Fan Hub',
+  description = 'Join the global Supremacy 1914 community',
+  lang = 'en',
+  publishedTime,
+  modifiedTime
+} = Astro.props;
+
+const siteUrl = Astro.site || 'https://supremacy1914.dev';
+const currentUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Supremacy 1914 Fan Hub",
+  "description": "Global community hub for Supremacy 1914 players",
+  "url": siteUrl,
+  "logo": new URL('/favicon.svg', siteUrl).href,
+  "sameAs": [
+    "https://t.me/Supremacy1914EN",
+    "https://t.me/supremacy1914ru"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Community Support",
+    "availableLanguage": ["English", "Russian", "German", "French", "Spanish", "Portuguese", "Polish", "Italian", "Finnish", "Swedish", "Norwegian", "Arabic", "Indonesian", "Japanese", "Chinese", "Hindi", "Turkish"]
+  }
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Supremacy 1914 Fan Hub",
+  "url": siteUrl,
+  "description": "Multilingual community hub for Supremacy 1914 players",
+  "inLanguage": lang,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Supremacy 1914 Fan Community"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${siteUrl}/allies?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
+const webpageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": title,
+  "description": description,
+  "url": currentUrl,
+  "inLanguage": lang,
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": siteUrl
+  },
+  ...(publishedTime && { "datePublished": publishedTime }),
+  ...(modifiedTime && { "dateModified": modifiedTime })
+};
+
+const articleSchema = publishedTime ? {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "url": currentUrl,
+  "datePublished": publishedTime,
+  "dateModified": modifiedTime || publishedTime,
+  "author": {
+    "@type": "Organization",
+    "name": "Supremacy 1914 Fan Community"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Supremacy 1914 Fan Hub",
+    "logo": {
+      "@type": "ImageObject",
+      "url": new URL('/favicon.svg', siteUrl).href
+    }
+  },
+  "inLanguage": lang
+} : null;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    },
+    ...(Astro.url.pathname !== '/' && Astro.url.pathname !== `/${lang}` && Astro.url.pathname !== `/${lang}/` ? [{
+      "@type": "ListItem",
+      "position": 2,
+      "name": title,
+      "item": currentUrl
+    }] : [])
+  ]
+};
+
+const schemas = [
+  organizationSchema,
+  websiteSchema,
+  type === 'article' && articleSchema ? articleSchema : webpageSchema,
+  breadcrumbSchema
+].filter(Boolean);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemas)} />
