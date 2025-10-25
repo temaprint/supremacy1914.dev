@@ -85,8 +85,8 @@ A multilingual community hub for Supremacy 1914 players, built with Astro. Conne
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd supremacy1914-hub
+git clone git@github.com:temaprint/supremacy1914.dev.git
+cd supremacy1914.dev
 ```
 
 2. Install dependencies:
